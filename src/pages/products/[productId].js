@@ -1,5 +1,7 @@
+import react from 'react';
+
 export default function ProductDetailsPage({ product }) {
-  const { image, name, price, category, status, description, review, features } = product;
+  const { image, name, price, category, status, description } = product;
 
   return (
     <div className="grid grid-cols-[1fr_2fr]">
@@ -18,7 +20,7 @@ export default function ProductDetailsPage({ product }) {
 }
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`http://localhost:5000/products`);
+  const res = await fetch(`https://pcbuilderserver-two.vercel.app/products`);
   const products = await res.json();
 
   const paths = products.map(pd => ({
@@ -27,15 +29,13 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
 export const getStaticProps = async context => {
-  console.log('------------------------------------');
-  console.log(context);
   const { params } = context;
-  const res = await fetch(`http://localhost:5000/products/${params.productId}`);
+  const res = await fetch(`https://pcbuilderserver-two.vercel.app/products/${params.productId}`);
   const product = await res.json();
 
   return {

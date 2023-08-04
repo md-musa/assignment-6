@@ -1,22 +1,16 @@
-import Nav from '@/components/nav';
 import ProductCard from '@/components/productCard';
 import { CATEGORIES } from '@/constants';
-import { Button } from 'antd';
-import { Inter } from 'next/font/google';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const inter = Inter({ subsets: ['latin'] });
-
 export default function Home({ products }) {
-  console.log(products);
+  // console.log(products);
   const router = useRouter();
 
   return (
     <div className="max-w-6xl mx-auto">
       <section className="grid grid-cols-4 gap-3">
-        {products.map(pd => (
-          <ProductCard product={pd} />
+        {products.map((pd, i) => (
+          <ProductCard product={pd} key={i} />
         ))}
       </section>
 
@@ -41,7 +35,7 @@ export default function Home({ products }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch('http://localhost:5000/products');
+  const res = await fetch('https://pcbuilderserver-two.vercel.app/products');
   const products = await res.json();
 
   return {

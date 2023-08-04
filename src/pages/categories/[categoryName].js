@@ -8,12 +8,12 @@ function ProductByCategoryPage() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/categories/${router.query.categoryName}`)
+    fetch(`https://pcbuilderserver-two.vercel.app/categories/${router.query.categoryName}`)
       .then(res => res.json())
       .then(data => {
         setProducts(data);
       });
-  }, []);
+  }, [router.query.categoryName]);
 
   return (
     <>
@@ -30,7 +30,7 @@ function ProductByCategoryPage() {
 export default ProductByCategoryPage;
 
 // export const getStaticPaths = async () => {
-//   const res = await fetch(`http://localhost:5000/products`);
+//   const res = await fetch(`https://pcbuilderserver-two.vercel.app/products`);
 //   const products = await res.json();
 
 //   const paths = products.map(pd => ({
@@ -47,7 +47,7 @@ export default ProductByCategoryPage;
 //   console.log('------------------------------------');
 //   console.log(context);
 //   const { params } = context;
-//   const res = await fetch(`http://localhost:5000/categories/${params.category}`);
+//   const res = await fetch(`https://pcbuilderserver-two.vercel.app/categories/${params.category}`);
 //   const product = await res.json();
 
 //   console.log('---------->', product);
